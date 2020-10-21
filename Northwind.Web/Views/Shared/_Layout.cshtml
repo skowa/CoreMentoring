@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Northwind</title>
+</head>
+<body>
+    <header>
+        <div class="topnav">
+            <a class="active" href="/">Home</a>
+            <a href="/Categories">Categories</a>
+            <a href="/Products">Products</a>
+        </div>
+    </header>
+    <div>
+        <main role="main" >
+            @RenderBody()
+        </main>
+    </div>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

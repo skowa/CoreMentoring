@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Northwind.Web.Models.CategoryModel>
+
+@{
+    ViewData["Title"] = "Categories Page";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(_ => item.CategoryName)
+                </td>
+                <td>
+                    @Html.DisplayFor(_ => item.Description)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

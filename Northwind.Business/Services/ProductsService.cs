@@ -39,5 +39,20 @@ namespace Northwind.Business.Services
 
             return _mapper.Map<IEnumerable<Product>>(products);
         }
+
+        public async Task<Product> GetProductByIdAsync(int id)
+        {
+            return _mapper.Map<Product>(await _productsProvider.GetProductByIdAsync(id));
+        }
+
+        public Task AddProductAsync(Product product)
+        {
+            return _productsProvider.AddAsync(_mapper.Map<ProductEntity>(product));
+        }
+
+        public Task UpdateProductAsync(Product product)
+        {
+            return _productsProvider.UpdateAsync(_mapper.Map<ProductEntity>(product));
+        }
     }
 }

@@ -24,6 +24,11 @@ namespace Northwind.Data.EF
             return _dbSet;
         }
 
+        public IQueryable<T> Get(Expression<Func<T, bool>> filter)
+        {
+            return Get().Where(filter);
+        }
+
         public async Task<IEnumerable<T>> GetAsync()
         {
             return await Get().ToListAsync();
@@ -43,6 +48,16 @@ namespace Northwind.Data.EF
         public async Task<IEnumerable<T>> GetWithAsync(params Expression<Func<T, object>>[] includeProperties)
         {
             return await GetWith(includeProperties).ToListAsync();
+        }
+
+        public void Add(T entity)
+        {
+            _dbSet.Add(entity);
+        }
+
+        public void Update(T entity)
+        {
+            _dbSet.Update(entity);
         }
     }
 }

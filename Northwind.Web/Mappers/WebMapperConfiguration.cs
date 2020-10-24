@@ -11,7 +11,8 @@ namespace Northwind.Web.Mappers
             configuration
                 .ApplyBusinessMapperConfiguration()
                 .ApplyCategoryModelMapping()
-                .ApplyProductModelMapping();
+                .ApplyProductModelMapping()
+                .ApplyProductEditModelMapping();
 
             return configuration;
         }

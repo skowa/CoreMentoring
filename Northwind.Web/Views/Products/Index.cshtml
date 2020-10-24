@@ -4,6 +4,8 @@
     ViewData["Title"] = "Products Page";
 }
 
+<a href="/products/create">Create New</a>
+
 <table class="table">
     <thead>
         <tr>
@@ -33,6 +35,8 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Discontinued)
+            </th>
+            <th>
             </th>
             <th></th>
         </tr>
@@ -67,6 +71,9 @@
             </td>
             <td>
                 @Html.DisplayFor(_ => item.Discontinued)
+            </td>
+            <td>
+                @Html.ActionLink("Update", "update", new { id = item.ProductId })
             </td>
         </tr>
         }

@@ -1,0 +1,72 @@
+﻿@model Northwind.Web.Models.ProductEditModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create Product</h1>
+
+<hr />
+
+<fieldset>
+
+    @using (Html.BeginForm())
+    {
+        <p>
+            @Html.LabelFor(model => model.ProductName)
+            @Html.EditorFor(model => model.ProductName)
+            @Html.ValidationMessageFor(model => model.ProductName)
+        </p>
+
+        <p>
+            @Html.LabelFor(model => model.CategoryId)
+            @Html.DropDownListFor(model => model.CategoryId, new SelectList(ViewBag.Categories, "CategoryId", "CategoryName"))
+        </p>
+
+        <p>
+            @Html.LabelFor(model => model.SupplierId)
+            @Html.DropDownListFor(model => model.SupplierId, new SelectList(ViewBag.Suppliers, "SupplierId", "CompanyName"))
+        </p>
+
+        <p>
+            @Html.LabelFor(model => model.UnitPrice)
+            @Html.EditorFor(model => model.UnitPrice)
+            @Html.ValidationMessageFor(model => model.UnitPrice)
+        </p>
+
+        <p>
+            @Html.LabelFor(model => model.QuantityPerUnit)
+            @Html.EditorFor(model => model.QuantityPerUnit)
+            @Html.ValidationMessageFor(model => model.QuantityPerUnit)
+        </p>
+
+        <p>
+            @Html.LabelFor(model => model.UnitsInStock)
+            @Html.EditorFor(model => model.UnitsInStock)
+            @Html.ValidationMessageFor(model => model.UnitsInStock)
+        </p>
+
+        <p>
+            @Html.LabelFor(model => model.ReorderLevel)
+            @Html.EditorFor(model => model.ReorderLevel)
+            @Html.ValidationMessageFor(model => model.ReorderLevel)
+        </p>
+
+        <p>
+            @Html.LabelFor(model => model.Discontinued)
+            @Html.EditorFor(model => model.Discontinued)
+            @Html.ValidationMessageFor(model => model.Discontinued)
+        </p>
+
+        <p>
+            <button type="submit">Create Product</button>
+        </p>
+    }
+
+</fieldset>
+
+<div>
+    <a href="/products">Back to List</a>
+</div>
+

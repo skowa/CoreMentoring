@@ -24,6 +24,7 @@ namespace Northwind.Business.Configuration
         {
             services.AddScoped<ICategoriesProvider, CategoriesProvider>();
             services.AddScoped<IProductsProvider, ProductsProvider>();
+            services.AddScoped<ISuppliersProvider, SuppliersProvider>();
 
             return services;
         }
@@ -32,6 +33,7 @@ namespace Northwind.Business.Configuration
         {
             services.AddScoped<ICategoriesService, CategoriesService>();
             services.AddScoped<IProductsService, ProductsService>();
+            services.AddScoped<ISuppliersService, SuppliersService>();
 
             return services;
         }

@@ -9,5 +9,11 @@ namespace Northwind.Business.Interfaces.Providers
         Task<IEnumerable<ProductEntity>> GetProductsAsync();
 
         Task<IEnumerable<ProductEntity>> GetProductsAsync(int count);
+
+        Task<ProductEntity> GetProductByIdAsync(int id);
+
+        Task AddAsync(ProductEntity product);
+
+        Task UpdateAsync(ProductEntity product);
     }
 }

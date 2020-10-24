@@ -21,6 +21,7 @@ namespace Northwind.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<ConnectionStringStore>(Configuration.GetSection(ConfigurationProperties.ConnectionStringSection));
+            services.Configure<ProductOptions>(Configuration.GetSection(ConfigurationProperties.ProductSection));
 
             services.AddWebServices();
 

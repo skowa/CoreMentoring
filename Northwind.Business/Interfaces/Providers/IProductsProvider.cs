@@ -7,5 +7,7 @@ namespace Northwind.Business.Interfaces.Providers
     public interface IProductsProvider
     {
         Task<IEnumerable<ProductEntity>> GetProductsAsync();
+
+        Task<IEnumerable<ProductEntity>> GetProductsAsync(int count);
     }
 }

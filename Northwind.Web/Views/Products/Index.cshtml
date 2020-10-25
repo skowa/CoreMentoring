@@ -4,78 +4,80 @@
     ViewData["Title"] = "Products Page";
 }
 
-<a href="/products/create">Create New</a>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CategoryName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SupplierName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UnitPrice)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UnitsInStock)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UnitsOnOrder)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.QuantityPerUnit)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ReorderLevel)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Discontinued)
-            </th>
-            <th>
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-        <tr>
-            <td>
-                @Html.DisplayFor(_ => item.ProductName)
-            </td>
-            <td>
-                @Html.DisplayFor(_ => item.CategoryName)
-            </td>
-            <td>
-                @Html.DisplayFor(_ => item.SupplierName)
-            </td>
-            <td>
-                @Html.DisplayFor(_ => item.UnitPrice)
-            </td>
-            <td>
-                @Html.DisplayFor(_ => item.UnitsInStock)
-            </td>
-            <td>
-                @Html.DisplayFor(_ => item.UnitsOnOrder)
-            </td>
-            <td>
-                @Html.DisplayFor(_ => item.QuantityPerUnit)
-            </td>
-            <td>
-                @Html.DisplayFor(_ => item.ReorderLevel)
-            </td>
-            <td>
-                @Html.DisplayFor(_ => item.Discontinued)
-            </td>
-            <td>
-                @Html.ActionLink("Update", "update", new { id = item.ProductId })
-            </td>
-        </tr>
-        }
-    </tbody>
-</table>
+<div class="container">
+    <div class="separated-link">
+        <a href="/products/create">Create New</a>
+    </div>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProductName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CategoryName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SupplierName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UnitPrice)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UnitsInStock)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UnitsOnOrder)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.QuantityPerUnit)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ReorderLevel)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Discontinued)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(_ => item.ProductName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(_ => item.CategoryName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(_ => item.SupplierName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(_ => item.UnitPrice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(_ => item.UnitsInStock)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(_ => item.UnitsOnOrder)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(_ => item.QuantityPerUnit)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(_ => item.ReorderLevel)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(_ => item.Discontinued)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Update", "update", new { id = item.ProductId })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

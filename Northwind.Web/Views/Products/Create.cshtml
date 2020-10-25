@@ -5,68 +5,67 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Create Product</h1>
 
-<hr />
-
-<fieldset>
+<div class="container">
+    <h1>Create Product</h1>
 
     @using (Html.BeginForm())
     {
-        <p>
+        <div class="form-group">
             @Html.LabelFor(model => model.ProductName)
-            @Html.EditorFor(model => model.ProductName)
-            @Html.ValidationMessageFor(model => model.ProductName)
-        </p>
+            @Html.EditorFor(model => model.ProductName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ProductName, string.Empty, new { @class = "text-danger" })
+        </div>
 
-        <p>
+        <div class="form-group">
             @Html.LabelFor(model => model.CategoryId)
-            @Html.DropDownListFor(model => model.CategoryId, new SelectList(ViewBag.Categories, "CategoryId", "CategoryName"))
-        </p>
+            @Html.DropDownListFor(model => model.CategoryId, new SelectList(ViewBag.Categories, "CategoryId", "CategoryName"), new { @class = "form-control" })
+        </div>
 
-        <p>
+        <div class="form-group">
             @Html.LabelFor(model => model.SupplierId)
-            @Html.DropDownListFor(model => model.SupplierId, new SelectList(ViewBag.Suppliers, "SupplierId", "CompanyName"))
-        </p>
+            @Html.DropDownListFor(model => model.SupplierId, new SelectList(ViewBag.Suppliers, "SupplierId", "CompanyName"), new { @class = "form-control" })
+        </div>
 
-        <p>
+        <div class="form-group">
             @Html.LabelFor(model => model.UnitPrice)
-            @Html.EditorFor(model => model.UnitPrice)
-            @Html.ValidationMessageFor(model => model.UnitPrice)
-        </p>
+            @Html.EditorFor(model => model.UnitPrice, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.UnitPrice, string.Empty, new { @class = "text-danger" })
+        </div>
 
-        <p>
+        <div class="form-group">
             @Html.LabelFor(model => model.QuantityPerUnit)
-            @Html.EditorFor(model => model.QuantityPerUnit)
-            @Html.ValidationMessageFor(model => model.QuantityPerUnit)
-        </p>
+            @Html.EditorFor(model => model.QuantityPerUnit, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.QuantityPerUnit, string.Empty, new { @class = "text-danger" })
+        </div>
 
-        <p>
+        <div class="form-group">
             @Html.LabelFor(model => model.UnitsInStock)
-            @Html.EditorFor(model => model.UnitsInStock)
-            @Html.ValidationMessageFor(model => model.UnitsInStock)
-        </p>
+            @Html.EditorFor(model => model.UnitsInStock, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.UnitsInStock, string.Empty, new { @class = "text-danger" })
+        </div>
 
-        <p>
+        <div class="form-group">
             @Html.LabelFor(model => model.ReorderLevel)
-            @Html.EditorFor(model => model.ReorderLevel)
-            @Html.ValidationMessageFor(model => model.ReorderLevel)
-        </p>
+            @Html.EditorFor(model => model.ReorderLevel, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ReorderLevel, string.Empty, new { @class = "text-danger" })
+        </div>
 
-        <p>
-            @Html.LabelFor(model => model.Discontinued)
+        <div class="form-group">
             @Html.EditorFor(model => model.Discontinued)
-            @Html.ValidationMessageFor(model => model.Discontinued)
-        </p>
+            @Html.LabelFor(model => model.Discontinued)
+            @Html.ValidationMessageFor(model => model.Discontinued, string.Empty, new { @class = "text-danger" })
+        </div>
 
-        <p>
-            <button type="submit">Create Product</button>
-        </p>
+        <button type="submit" class="btn btn-light">Create Product</button>
     }
 
-</fieldset>
-
-<div>
-    <a href="/products">Back to List</a>
+    <div class="separated-link">
+        <a href="/products">Back to List</a>
+    </div>
 </div>
 
+@section Scripts {
+    <script src="~/lib/jquery-validate/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

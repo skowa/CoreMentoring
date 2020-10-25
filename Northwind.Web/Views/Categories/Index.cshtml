@@ -4,29 +4,30 @@
     ViewData["Title"] = "Categories Page";
 }
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.CategoryName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+<div class="container">
+    <table class="table table-hover">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(_ => item.CategoryName)
-                </td>
-                <td>
-                    @Html.DisplayFor(_ => item.Description)
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.CategoryName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(_ => item.CategoryName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(_ => item.Description)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,13 @@
+﻿@model Northwind.Web.Models.ErrorModel
+@{
+    ViewData["Title"] = "Error";
+}
+
+<div class="container">
+    <h1 class="text-danger">Error.</h1>
+    <h2 class="text-danger">An error occurred while processing your request.</h2>
+
+    <p>
+        <strong>Log ID:</strong> <code>@Model.LogId</code>
+    </p>
+</div>

@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30608.117
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Northwind.Web", "Northwind.Web\Northwind.Web.csproj", "{9E1A5C96-1849-4F6F-A385-95DA7C04616C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Northwind.Web", "Northwind.Web\Northwind.Web.csproj", "{9E1A5C96-1849-4F6F-A385-95DA7C04616C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Northwind.Data", "Northwind.Data\Northwind.Data.csproj", "{C7C54286-8470-4F28-8AD0-8DE8DFCAEBBE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Northwind.Data", "Northwind.Data\Northwind.Data.csproj", "{C7C54286-8470-4F28-8AD0-8DE8DFCAEBBE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Northwind.Data.EF", "Northwind.Data.EF\Northwind.Data.EF.csproj", "{6F291B97-13F5-48E5-8B3E-EE3799248D58}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Northwind.Data.EF", "Northwind.Data.EF\Northwind.Data.EF.csproj", "{6F291B97-13F5-48E5-8B3E-EE3799248D58}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Northwind.Business", "Northwind.Business\Northwind.Business.csproj", "{CF0007DD-6027-445C-8F3C-AECDEA30D4F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Northwind.Business", "Northwind.Business\Northwind.Business.csproj", "{CF0007DD-6027-445C-8F3C-AECDEA30D4F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Northwind.Core", "Northwind.Core\Northwind.Core.csproj", "{B0AF09B3-0EC0-4239-882B-6981133241EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Northwind.Core", "Northwind.Core\Northwind.Core.csproj", "{B0AF09B3-0EC0-4239-882B-6981133241EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Northwind.Web.Tests.Unit", "Northwind.Web.Tests.Unit\Northwind.Web.Tests.Unit.csproj", "{357D9A6B-2606-48B2-813F-0F19CB1CB11D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{B0AF09B3-0EC0-4239-882B-6981133241EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B0AF09B3-0EC0-4239-882B-6981133241EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B0AF09B3-0EC0-4239-882B-6981133241EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{357D9A6B-2606-48B2-813F-0F19CB1CB11D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{357D9A6B-2606-48B2-813F-0F19CB1CB11D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{357D9A6B-2606-48B2-813F-0F19CB1CB11D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{357D9A6B-2606-48B2-813F-0F19CB1CB11D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

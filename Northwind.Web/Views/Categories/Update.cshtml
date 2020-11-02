@@ -1,0 +1,27 @@
+﻿@model Northwind.Web.Models.CategoryModel
+
+@{
+    ViewData["Title"] = "Image";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container">
+    <h1>Update Image</h1>
+
+    @using (Html.BeginForm("Image", "Categories", new { id = Model.CategoryId }, FormMethod.Post, null, new { enctype = "multipart/form-data" }))
+    {
+        <div class="form-group">
+            <div class="custom-file mb-3">
+                <input type="file" class="custom-file-input" required id="customFile" name="imageFile">
+                <label class="custom-file-label" for="customFile">Choose file</label>
+            </div>
+        </div>
+
+        <button class="btn btn-light" type="submit">Update</button>
+    }
+
+    <div class="separated-link">
+        <a href="/categories">Back to List</a>
+    </div>
+</div>

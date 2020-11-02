@@ -12,7 +12,6 @@ using Northwind.Web.Models;
 
 namespace Northwind.Web.Controllers
 {
-    [Route(Routes.Categories.Prefix)]
     public class CategoriesController : Controller
     {
         private const string IndexView = "Index";
@@ -34,7 +33,6 @@ namespace Northwind.Web.Controllers
         }
 
         [HttpGet]
-        [Route(Routes.Categories.Image)]
         public async Task<IActionResult> Image(int id)
         {
             var image = (await _categoriesService.GetCategoryImageAsync(id)).ToArray();
@@ -43,7 +41,6 @@ namespace Northwind.Web.Controllers
         }
 
         [HttpPost]
-        [Route(Routes.Categories.Image)]
         public async Task<IActionResult> Image(IFormFile imageFile, int id)
         {
             try
@@ -62,7 +59,6 @@ namespace Northwind.Web.Controllers
         }
 
         [HttpGet]
-        [Route(Routes.Categories.Update)]
         public IActionResult Update(int id)
         {
             var categoryModel = new CategoryModel { CategoryId = id };

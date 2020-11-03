@@ -5,5 +5,6 @@
         public const string ConnectionStringSection = "ConnectionStrings";
         public const string ProductSection = "Product";
         public const string AzureLogsAnalyticsWorkspaceSection = "AzureLogsAnalyticsWorkspace";
+        public const string CachingSection = "Caching";
     }
 }

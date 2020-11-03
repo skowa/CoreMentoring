@@ -10,6 +10,7 @@ using Northwind.Core.Contants;
 using Northwind.Core.Options;
 using Northwind.Web.Configuration;
 using Northwind.Web.Constants;
+using Northwind.Web.Filters;
 using Northwind.Web.Middlewares;
 using Serilog;
 
@@ -32,11 +33,15 @@ namespace Northwind.Web
             services.Configure<ProductOptions>(Configuration.GetSection(ConfigurationProperties.ProductSection));
             services.Configure<AzureLogsAnalyticsWorkspace>(Configuration.GetSection(ConfigurationProperties.AzureLogsAnalyticsWorkspaceSection));
             services.Configure<CachingOptions>(Configuration.GetSection(ConfigurationProperties.CachingSection));
+            services.Configure<LoggingOptions>(Configuration.GetSection(ConfigurationProperties.LoggingSection));
 
             services.AddWebServices();
             services.AddCachingServices();
 
-            services.AddControllersWithViews();
+            services.AddControllersWithViews(options =>
+            {
+                options.Filters.Add<LoggingActionFilter>();
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger logger)

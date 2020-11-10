@@ -1,4 +1,4 @@
-﻿namespace Northwind.Core.Contants
+﻿namespace Northwind.Core.Constants
 {
     public static class ConfigurationProperties
     {

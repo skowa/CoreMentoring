@@ -34,6 +34,7 @@ namespace Northwind.Business.Configuration
             services.AddScoped<ICategoriesService, CategoriesService>();
             services.AddScoped<IProductsService, ProductsService>();
             services.AddScoped<ISuppliersService, SuppliersService>();
+            services.AddScoped<IImagesService, BmpImagesService>();
 
             return services;
         }

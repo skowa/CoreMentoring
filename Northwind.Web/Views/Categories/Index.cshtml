@@ -14,6 +14,7 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Description)
                 </th>
+                <th/>
             </tr>
         </thead>
         <tbody>
@@ -25,6 +26,11 @@
                     </td>
                     <td>
                         @Html.DisplayFor(_ => item.Description)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Image", "image", new { id = item.CategoryId })
+                        <br />
+                        @Html.ActionLink("Update", "update", new { id = item.CategoryId })
                     </td>
                 </tr>
             }

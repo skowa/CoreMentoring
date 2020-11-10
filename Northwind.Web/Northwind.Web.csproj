@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Northwind.Business\Northwind.Business.csproj" />
+    <ProjectReference Include="..\Northwind.Core.Caching\Northwind.Core.Caching.csproj" />
     <ProjectReference Include="..\Northwind.Core\Northwind.Core.csproj" />
   </ItemGroup>
 

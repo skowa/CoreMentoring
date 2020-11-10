@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -10,7 +9,6 @@ using Northwind.Web.Models;
 
 namespace Northwind.Web.Controllers
 {
-    [Route(Routes.Products.Prefix)]
     public class ProductsController : Controller
     {
         private const string IndexView = "Index";
@@ -40,7 +38,6 @@ namespace Northwind.Web.Controllers
         }
 
         [HttpGet]
-        [Route(Routes.Products.Create)]
         public async Task<IActionResult> Create()
         {
             await FillViewBagAsync();
@@ -49,7 +46,6 @@ namespace Northwind.Web.Controllers
         }
 
         [HttpPost]
-        [Route(Routes.Products.Create)]
         public async Task<IActionResult> Create(ProductEditModel productEditModel)
         {
             if (!ModelState.IsValid)
@@ -66,7 +62,6 @@ namespace Northwind.Web.Controllers
         }
 
         [HttpGet]
-        [Route(Routes.Products.Update)]
         public async Task<IActionResult> Update(int id)
         {
             var product = await _productsService.GetProductByIdAsync(id);
@@ -76,7 +71,6 @@ namespace Northwind.Web.Controllers
         }
 
         [HttpPost]
-        [Route(Routes.Products.Update)]
         public async Task<IActionResult> Update(ProductEditModel productEditModel)
         {
             if (!ModelState.IsValid)

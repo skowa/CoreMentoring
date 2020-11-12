@@ -1,3 +1,7 @@
 ﻿.separated-link {
   margin: 10px 0 10px 0;
 }
+
+.after-logo {
+  clear: both;
+}

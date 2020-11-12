@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Northwind.Core.Caching.Configuration;
 using Northwind.Core.Caching.Options;
-using Northwind.Core.Contants;
+using Northwind.Core.Constants;
 using Northwind.Core.Options;
 using Northwind.Web.Configuration;
 using Northwind.Web.Constants;

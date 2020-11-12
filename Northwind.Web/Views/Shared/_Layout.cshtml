@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Northwind.Web.Constants;
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -8,24 +10,31 @@
     <title>@ViewData["Title"] - Northwind</title>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-inverse navbar-dark bg-dark">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
+    @if (IsSectionDefined(HtmlSections.Headers))
+    {
+        @RenderSection(HtmlSections.Headers, false)
+    }
+    else
+    {
+        <header>
+            <nav class="navbar navbar-inverse navbar-dark bg-dark">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                    </div>
+                    <div class="collapse navbar-collapse" id="navbarExternalContent">
+                        <ul class="nav navbar-nav">
+                            <li><a href="/" class="nav-link">Home</a></li>
+                            <li><a href="/Categories" class="nav-link">Categories</a></li>
+                            <li><a href="/Products" class="nav-link">Products</a></li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="collapse navbar-collapse" id="navbarExternalContent">
-                    <ul class="nav navbar-nav">
-                        <li><a href="/" class="nav-link">Home</a></li>
-                        <li><a href="/Categories" class="nav-link">Categories</a></li>
-                        <li><a href="/Products" class="nav-link">Products</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
+            </nav>
+        </header>
+    }
 
     <div>
         <main role="main">
@@ -33,8 +42,21 @@
         </main>
     </div>
 
+    @if (IsSectionDefined(HtmlSections.Footers))
+    {
+        @RenderSection(HtmlSections.Footers, false)
+    }
+    else
+    {
+        <footer>
+            <div class="container">
+                <p class="text-center font-weight-light">@DateTime.Now</p>
+            </div>
+        </footer>
+    }
+
     <script src="~/lib/jquery/jquery.min.js"></script>
     <script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
-    @RenderSection("Scripts", required: false)
+    @RenderSection(HtmlSections.Scripts, required: false)
 </body>
 </html>

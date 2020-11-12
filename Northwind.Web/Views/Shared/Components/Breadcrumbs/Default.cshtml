@@ -1,0 +1,10 @@
+﻿@model IList<Northwind.Web.Models.BreadcrumbModel>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        @foreach (var breadcrumb in Model)
+        {
+            <li class="breadcrumb-item" aria-current="page"><a href="@breadcrumb.Link">@breadcrumb.Name</a></li>
+        }
+    </ol>
+</nav>

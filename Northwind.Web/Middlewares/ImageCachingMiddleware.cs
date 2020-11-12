@@ -10,9 +10,6 @@ namespace Northwind.Web.Middlewares
 {
     public class ImageCachingMiddleware
     {
-        private const string ControllerKey = "controller";
-        private const string ActionKey = "action";
-        private const string IdKey = "id";
         private const string ImagesControllerName = "Categories";
         private const string ImagesActionName = "Image";
         private const string GetMethod = "GET";
@@ -30,10 +27,10 @@ namespace Northwind.Web.Middlewares
         {
             var routeValues = context.Request.RouteValues;
             if (context.Request.Method.Equals(GetMethod, StringComparison.OrdinalIgnoreCase) &&
-                string.Equals(routeValues[ControllerKey] as string, ImagesControllerName, StringComparison.OrdinalIgnoreCase) &&
-                string.Equals(routeValues[ActionKey] as string, ImagesActionName, StringComparison.OrdinalIgnoreCase))
+                string.Equals(routeValues[RouteValuesKeys.ControllerKey] as string, ImagesControllerName, StringComparison.OrdinalIgnoreCase) &&
+                string.Equals(routeValues[RouteValuesKeys.ActionKey] as string, ImagesActionName, StringComparison.OrdinalIgnoreCase))
             {
-                var fileName = (routeValues[IdKey] as string) + FileExtensions.Bmp;
+                var fileName = (routeValues[RouteValuesKeys.IdKey] as string) + FileExtensions.Bmp;
                 var cacheItem = _cachingService.Get(fileName);
                 if (cacheItem != null)
                 {

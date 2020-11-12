@@ -30,7 +30,8 @@
                         @Html.DisplayFor(_ => item.Description)
                     </td>
                     <td>
-                        @Html.ActionLink("Image", "image", new { id = item.CategoryId })
+                        <a northwind-id="@item.CategoryId">Image</a>
+                        @*@Html.NorthwindImageLink(item.CategoryId, "Image")*@
                         <br />
                         @Html.ActionLink("Update", "update", new { id = item.CategoryId })
                     </td>

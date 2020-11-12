@@ -72,7 +72,7 @@ namespace Northwind.Web
 
                 endpoints.MapControllerRoute(
                     name: "image",
-                    pattern: "images/{id}",
+                    pattern: string.Format(Routes.ImagesRoute, "{id}"),
                     defaults: new { controller = "Categories", action = "Image" });
             });
         }

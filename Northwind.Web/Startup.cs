@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Northwind.Core.Caching.Configuration;
 using Northwind.Core.Caching.Options;
-using Northwind.Core.Contants;
+using Northwind.Core.Constants;
 using Northwind.Core.Options;
 using Northwind.Web.Configuration;
 using Northwind.Web.Constants;
@@ -72,7 +72,7 @@ namespace Northwind.Web
 
                 endpoints.MapControllerRoute(
                     name: "image",
-                    pattern: "images/{id}",
+                    pattern: string.Format(Routes.ImagesRoute, "{id}"),
                     defaults: new { controller = "Categories", action = "Image" });
             });
         }

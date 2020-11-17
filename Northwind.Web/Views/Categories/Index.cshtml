@@ -4,6 +4,8 @@
     ViewData["Title"] = "Categories Page";
 }
 
+<vc:breadcrumbs />
+
 <div class="container">
     <table class="table table-hover">
         <thead>
@@ -28,7 +30,8 @@
                         @Html.DisplayFor(_ => item.Description)
                     </td>
                     <td>
-                        @Html.ActionLink("Image", "image", new { id = item.CategoryId })
+                        <a northwind-id="@item.CategoryId">Image</a>
+                        @*@Html.NorthwindImageLink(item.CategoryId, "Image")*@
                         <br />
                         @Html.ActionLink("Update", "update", new { id = item.CategoryId })
                     </td>
@@ -37,3 +40,12 @@
         </tbody>
     </table>
 </div>
+
+@section Footers
+{
+    <footer>
+        <div class="container">
+            <p class="text-center text-warning font-weight-light">The categories cannot be edited.</p>
+        </div>
+    </footer>
+}

@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Northwind.Business\Northwind.Business.csproj" />
+    <ProjectReference Include="..\Northwind.Core.Web\Northwind.Core.Web.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Northwind.Business.Mappers;
 
 namespace Northwind.Web.Mappers
 {
@@ -9,9 +8,7 @@ namespace Northwind.Web.Mappers
             this IMapperConfigurationExpression configuration)
         {
             configuration
-                .ApplyBusinessMapperConfiguration()
-                .ApplyCategoryModelMapping()
-                .ApplyProductModelMapping()
+                .ApplyCoreWebMapperConfiguration()
                 .ApplyProductEditModelMapping();
 
             return configuration;

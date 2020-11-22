@@ -19,8 +19,10 @@ namespace Northwind.Data
 
         Task<IEnumerable<T>> GetWithAsync(params Expression<Func<T, object>>[] includeProperties);
 
-        void Add(T entity);
+        T Add(T entity);
 
         void Update(T entity);
+
+        void Remove(T entity);
     }
 }

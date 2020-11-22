@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Northwind.Core.Web.Mappers;
 
 namespace Northwind.Web.Mappers
 {

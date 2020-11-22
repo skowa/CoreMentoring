@@ -45,14 +45,25 @@ namespace Northwind.Business.Services
             return _mapper.Map<Product>(await _productsProvider.GetProductByIdAsync(id));
         }
 
-        public Task AddProductAsync(Product product)
+        public async Task<Product> AddProductAsync(Product product)
         {
-            return _productsProvider.AddAsync(_mapper.Map<ProductEntity>(product));
+            var createdProduct = await _productsProvider.AddAsync(_mapper.Map<ProductEntity>(product));
+
+            return _mapper.Map<Product>(createdProduct);
         }
 
         public Task UpdateProductAsync(Product product)
         {
             return _productsProvider.UpdateAsync(_mapper.Map<ProductEntity>(product));
+        }
+
+        public async Task DeleteProductAsync(int id)
+        {
+            var product = await _productsProvider.GetProductByIdAsync(id);
+            if (product != null)
+            {
+                await _productsProvider.RemoveAsync(product);
+            }
         }
     }
 }

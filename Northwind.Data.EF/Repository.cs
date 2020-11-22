@@ -50,14 +50,19 @@ namespace Northwind.Data.EF
             return await GetWith(includeProperties).ToListAsync();
         }
 
-        public void Add(T entity)
+        public T Add(T entity)
         {
-            _dbSet.Add(entity);
+            return _dbSet.Add(entity).Entity;
         }
 
         public void Update(T entity)
         {
             _dbSet.Update(entity);
+        }
+
+        public void Remove(T entity)
+        {
+            _dbSet.Remove(entity);
         }
     }
 }

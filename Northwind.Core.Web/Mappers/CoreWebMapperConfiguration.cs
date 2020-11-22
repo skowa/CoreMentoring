@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Northwind.Business.Mappers;
 
-namespace Northwind.Web.Mappers
+namespace Northwind.Core.Web.Mappers
 {
     public static class CoreWebMapperConfiguration
     {
@@ -11,7 +11,8 @@ namespace Northwind.Web.Mappers
             configuration
                 .ApplyBusinessMapperConfiguration()
                 .ApplyCategoryModelMapping()
-                .ApplyProductModelMapping();
+                .ApplyProductModelMapping()
+                .ApplyProductEditModelMapping();
 
             return configuration;
         }

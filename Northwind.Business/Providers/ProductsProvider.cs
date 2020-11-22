@@ -42,16 +42,25 @@ namespace Northwind.Business.Providers
                 .SingleOrDefaultAsync();
         }
 
-        public Task AddAsync(ProductEntity product)
+        public async Task<ProductEntity> AddAsync(ProductEntity product)
         {
-            _unitOfWork.Repository<ProductEntity>().Add(product);
+            var productEntity = _unitOfWork.Repository<ProductEntity>().Add(product);
 
-            return _unitOfWork.SaveChangesAsync();
+            await _unitOfWork.SaveChangesAsync();
+
+            return productEntity;
         }
 
         public Task UpdateAsync(ProductEntity product)
         {
             _unitOfWork.Repository<ProductEntity>().Update(product);
+
+            return _unitOfWork.SaveChangesAsync();
+        }
+
+        public Task RemoveAsync(ProductEntity product)
+        {
+            _unitOfWork.Repository<ProductEntity>().Remove(product);
 
             return _unitOfWork.SaveChangesAsync();
         }

@@ -17,6 +17,8 @@ namespace Northwind.Data
 
         IQueryable<T> GetWith(params Expression<Func<T, object>>[] includeProperties);
 
+        IQueryable<T> GetWith(Expression<Func<T, bool>> filter, params Expression<Func<T, object>>[] includeProperties);
+
         Task<IEnumerable<T>> GetWithAsync(params Expression<Func<T, object>>[] includeProperties);
 
         T Add(T entity);

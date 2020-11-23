@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Northwind.API.Constants;
 using Northwind.Business.Interfaces.Services;
@@ -23,6 +24,7 @@ namespace Northwind.API.Controllers
         }
 
         [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<ProductModel>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetProducts()
         {
             var products = await _productsService.GetProductsAsync();
@@ -32,6 +34,8 @@ namespace Northwind.API.Controllers
 
         [HttpGet]
         [Route(Routes.Products.ProductById)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ProductModel), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetProductById(int id)
         {
             var product = await _productsService.GetProductByIdAsync(id);
@@ -44,6 +48,8 @@ namespace Northwind.API.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ProductModel), StatusCodes.Status201Created)]
         public async Task<IActionResult> CreateProduct([FromBody] ProductEditModel productEditModel)
         {
             if (!ModelState.IsValid)
@@ -57,6 +63,8 @@ namespace Northwind.API.Controllers
         }
 
         [HttpPut]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> UpdateProduct([FromBody] ProductEditModel productEditModel)
         {
             if (!ModelState.IsValid)
@@ -71,6 +79,7 @@ namespace Northwind.API.Controllers
 
         [HttpDelete]
         [Route(Routes.Products.ProductById)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> DeleteProductById(int id)
         {
             await _productsService.DeleteProductAsync(id);

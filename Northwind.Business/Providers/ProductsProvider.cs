@@ -38,7 +38,9 @@ namespace Northwind.Business.Providers
         public Task<ProductEntity> GetProductByIdAsync(int id)
         {
             return _unitOfWork.Repository<ProductEntity>()
-                .Get(product => product.ProductID == id)
+                .GetWith(product => product.ProductID == id,
+                    product => product.Supplier,
+                    product => product.Category)
                 .SingleOrDefaultAsync();
         }
 

@@ -45,6 +45,11 @@ namespace Northwind.Data.EF
             return includeProperties.Aggregate(query, (current, includeProperty) => current.Include(includeProperty));
         }
 
+        public IQueryable<T> GetWith(Expression<Func<T, bool>> filter, params Expression<Func<T, object>>[] includeProperties)
+        {
+            return GetWith(includeProperties).Where(filter);
+        }
+
         public async Task<IEnumerable<T>> GetWithAsync(params Expression<Func<T, object>>[] includeProperties)
         {
             return await GetWith(includeProperties).ToListAsync();

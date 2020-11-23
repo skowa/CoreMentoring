@@ -27,6 +27,7 @@ namespace Northwind.API.Controllers
         }
 
         [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<CategoryModel>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetCategories()
         {
             var categories = await _categoriesService.GetCategoriesAsync();
@@ -36,6 +37,7 @@ namespace Northwind.API.Controllers
 
         [HttpGet]
         [Route(Routes.Categories.ImageByCategoryId)]
+        [ProducesResponseType(typeof(FileContentResult), StatusCodes.Status200OK)]
         public async Task<IActionResult> Image(int id)
         {
             var image = (await _categoriesService.GetCategoryImageAsync(id)).ToArray();
@@ -45,6 +47,8 @@ namespace Northwind.API.Controllers
 
         [HttpPut]
         [Route(Routes.Categories.ImageByCategoryId)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Image(IFormFile imageFile, int id)
         {
             try

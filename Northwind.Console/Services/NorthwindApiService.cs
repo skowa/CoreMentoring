@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Northwind.Console.Constants;
 using Northwind.Console.Interfaces.Services;
 using Northwind.Web.Models;
 
@@ -13,9 +14,9 @@ namespace Northwind.Console.Services
 
         private readonly HttpClient _httpClient;
 
-        public NorthwindApiService(HttpClient httpClient)
+        public NorthwindApiService(IHttpClientFactory httpClientFactory)
         {
-            _httpClient = httpClient;
+            _httpClient = httpClientFactory.CreateClient(HttpClientNames.NorthwindApiHttpClient);
         }
 
         public async Task<IEnumerable<Category>> GetCategoriesAsync()

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Northwind.Core.Caching.Interfaces;
+using Northwind.Core.Web.Constants;
 using Northwind.Web.Constants;
 
 namespace Northwind.Web.Middlewares

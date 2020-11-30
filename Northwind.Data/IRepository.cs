@@ -17,10 +17,14 @@ namespace Northwind.Data
 
         IQueryable<T> GetWith(params Expression<Func<T, object>>[] includeProperties);
 
+        IQueryable<T> GetWith(Expression<Func<T, bool>> filter, params Expression<Func<T, object>>[] includeProperties);
+
         Task<IEnumerable<T>> GetWithAsync(params Expression<Func<T, object>>[] includeProperties);
 
-        void Add(T entity);
+        T Add(T entity);
 
         void Update(T entity);
+
+        void Remove(T entity);
     }
 }

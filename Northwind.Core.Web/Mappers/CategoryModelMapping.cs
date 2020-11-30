@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Northwind.Core.Domain;
-using Northwind.Web.Models;
+using Northwind.Core.Web.Models;
 
-namespace Northwind.Web.Mappers
+namespace Northwind.Core.Web.Mappers
 {
     internal static class CategoryModelMapping
     {

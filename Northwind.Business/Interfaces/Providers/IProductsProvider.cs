@@ -12,8 +12,10 @@ namespace Northwind.Business.Interfaces.Providers
 
         Task<ProductEntity> GetProductByIdAsync(int id);
 
-        Task AddAsync(ProductEntity product);
+        Task<ProductEntity> AddAsync(ProductEntity product);
 
         Task UpdateAsync(ProductEntity product);
+
+        Task RemoveAsync(ProductEntity product);
     }
 }

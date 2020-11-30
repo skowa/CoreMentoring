@@ -1,4 +1,5 @@
-﻿using Northwind.Web.Models;
+﻿using Northwind.Core.Web.Models;
+using Northwind.Web.Models;
 
 namespace Northwind.Web.Tests.Unit.Builders
 {

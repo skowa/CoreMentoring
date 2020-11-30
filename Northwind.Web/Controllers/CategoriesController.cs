@@ -7,8 +7,8 @@ using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Northwind.Business.Interfaces.Services;
-using Northwind.Web.Constants;
-using Northwind.Web.Models;
+using Northwind.Core.Web.Constants;
+using Northwind.Core.Web.Models;
 
 namespace Northwind.Web.Controllers
 {

@@ -15,7 +15,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Northwind.Core", "Northwind
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Northwind.Web.Tests.Unit", "Northwind.Web.Tests.Unit\Northwind.Web.Tests.Unit.csproj", "{357D9A6B-2606-48B2-813F-0F19CB1CB11D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Northwind.Core.Caching", "Northwind.Core.Caching\Northwind.Core.Caching.csproj", "{23EF0CC6-ABE0-4BDA-B4A7-1AE1B5C20116}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Northwind.Core.Caching", "Northwind.Core.Caching\Northwind.Core.Caching.csproj", "{23EF0CC6-ABE0-4BDA-B4A7-1AE1B5C20116}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Northwind.API", "Northwind.API\Northwind.API.csproj", "{8ADCA525-D83D-4140-AF95-46EA9A882F55}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Northwind.Core.Web", "Northwind.Core.Web\Northwind.Core.Web.csproj", "{B9E90710-483A-484F-ADF6-62DE34F47C09}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Northwind.Console", "Northwind.Console\Northwind.Console.csproj", "{79A2B894-AEAC-4B0E-8D97-E9C499A18146}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Northwind.API.Tests.Integration", "Northwind.API.Tests.Integration\Northwind.API.Tests.Integration.csproj", "{8F85DFD0-3D82-48AD-9A50-AC162EA97B33}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +59,22 @@ Global
 		{23EF0CC6-ABE0-4BDA-B4A7-1AE1B5C20116}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{23EF0CC6-ABE0-4BDA-B4A7-1AE1B5C20116}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{23EF0CC6-ABE0-4BDA-B4A7-1AE1B5C20116}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8ADCA525-D83D-4140-AF95-46EA9A882F55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8ADCA525-D83D-4140-AF95-46EA9A882F55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8ADCA525-D83D-4140-AF95-46EA9A882F55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8ADCA525-D83D-4140-AF95-46EA9A882F55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9E90710-483A-484F-ADF6-62DE34F47C09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9E90710-483A-484F-ADF6-62DE34F47C09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9E90710-483A-484F-ADF6-62DE34F47C09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9E90710-483A-484F-ADF6-62DE34F47C09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79A2B894-AEAC-4B0E-8D97-E9C499A18146}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79A2B894-AEAC-4B0E-8D97-E9C499A18146}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79A2B894-AEAC-4B0E-8D97-E9C499A18146}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79A2B894-AEAC-4B0E-8D97-E9C499A18146}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F85DFD0-3D82-48AD-9A50-AC162EA97B33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F85DFD0-3D82-48AD-9A50-AC162EA97B33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F85DFD0-3D82-48AD-9A50-AC162EA97B33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F85DFD0-3D82-48AD-9A50-AC162EA97B33}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

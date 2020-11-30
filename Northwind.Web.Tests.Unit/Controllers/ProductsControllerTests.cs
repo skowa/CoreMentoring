@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Northwind.Business.Interfaces.Services;
 using Northwind.Core.Domain;
+using Northwind.Core.Web.Models;
 using Northwind.Web.Controllers;
-using Northwind.Web.Models;
 using Northwind.Web.Tests.Unit.Builders;
 using Xunit;
 

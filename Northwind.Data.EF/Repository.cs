@@ -45,19 +45,29 @@ namespace Northwind.Data.EF
             return includeProperties.Aggregate(query, (current, includeProperty) => current.Include(includeProperty));
         }
 
+        public IQueryable<T> GetWith(Expression<Func<T, bool>> filter, params Expression<Func<T, object>>[] includeProperties)
+        {
+            return GetWith(includeProperties).Where(filter);
+        }
+
         public async Task<IEnumerable<T>> GetWithAsync(params Expression<Func<T, object>>[] includeProperties)
         {
             return await GetWith(includeProperties).ToListAsync();
         }
 
-        public void Add(T entity)
+        public T Add(T entity)
         {
-            _dbSet.Add(entity);
+            return _dbSet.Add(entity).Entity;
         }
 
         public void Update(T entity)
         {
             _dbSet.Update(entity);
+        }
+
+        public void Remove(T entity)
+        {
+            _dbSet.Remove(entity);
         }
     }
 }

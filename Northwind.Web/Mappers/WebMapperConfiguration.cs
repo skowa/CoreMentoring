@@ -9,7 +9,8 @@ namespace Northwind.Web.Mappers
             this IMapperConfigurationExpression configuration)
         {
             configuration
-                .ApplyCoreWebMapperConfiguration();
+                .ApplyCoreWebMapperConfiguration()
+                .ApplyUserRegisterModelMapping();
 
             return configuration;
         }

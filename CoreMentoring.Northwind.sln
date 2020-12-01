@@ -21,9 +21,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Northwind.API", "Northwind.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Northwind.Core.Web", "Northwind.Core.Web\Northwind.Core.Web.csproj", "{B9E90710-483A-484F-ADF6-62DE34F47C09}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Northwind.Console", "Northwind.Console\Northwind.Console.csproj", "{79A2B894-AEAC-4B0E-8D97-E9C499A18146}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Northwind.Console", "Northwind.Console\Northwind.Console.csproj", "{79A2B894-AEAC-4B0E-8D97-E9C499A18146}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Northwind.API.Tests.Integration", "Northwind.API.Tests.Integration\Northwind.API.Tests.Integration.csproj", "{8F85DFD0-3D82-48AD-9A50-AC162EA97B33}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Northwind.API.Tests.Integration", "Northwind.API.Tests.Integration\Northwind.API.Tests.Integration.csproj", "{8F85DFD0-3D82-48AD-9A50-AC162EA97B33}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

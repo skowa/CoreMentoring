@@ -1,13 +1,12 @@
-﻿using System.Text;
-using System.Text.Encodings.Web;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.WebUtilities;
 using Northwind.Business.Interfaces.Services;
-using Northwind.Web.Constants;
+using Northwind.Core.Domain;
 using Northwind.Web.Models;
 
 namespace Northwind.Web.Controllers
@@ -18,28 +17,23 @@ namespace Northwind.Web.Controllers
         private const string AccountControllerName = "Account";
         private const string IndexActionName = "Index";
         private const string InvalidLoginAttempt = "Invalid login attempt.";
-        private const string EmailNotExist = "User with this email doesn't exist";
 
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly IEmailService _emailService;
+        private readonly IAccountsService _accountsService;
         private readonly IMapper _mapper;
 
         public AccountController(
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager,
-            IEmailService emailService,
+            IAccountsService accountsService,
             IMapper mapper)
         {
-            _userManager = userManager;
-            _signInManager = signInManager;
-            _emailService = emailService;
+            _accountsService = accountsService;
             _mapper = mapper;
         }
 
         [HttpGet]
-        public IActionResult Register()
+        public async Task<IActionResult> Register()
         {
+            await FillViewBagWithExternalLoginsAsync();
+
             return View();
         }
 
@@ -48,33 +42,24 @@ namespace Northwind.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = _mapper.Map<IdentityUser>(userModel);
-                var result = await _userManager.CreateAsync(user, userModel.Password);
-                if (result.Succeeded)
+                var callbackUrl = Url.Action(nameof(ConfirmEmail), AccountControllerName, null, Request.Scheme);
+
+                var registerResult = await _accountsService.RegisterUserAsync(_mapper.Map<User>(userModel), callbackUrl);
+                if (registerResult.EmailConfirmationRequired)
                 {
-                    if (_userManager.Options.SignIn.RequireConfirmedAccount)
-                    {
-                        var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                        code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                        var callbackUrl = Url.Action(nameof(ConfirmEmail), AccountControllerName, new { userId = user.Id, code }, Request.Scheme);
-
-                        await _emailService.SendAsync(user.Email, EmailsContent.ConfirmEmailSubject, string.Format(EmailsContent.ConfirmEmailMessage, HtmlEncoder.Default.Encode(callbackUrl)));
-
-                        return RedirectToAction(nameof(RegisterConfirmation));
-                    }
-
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-
-                    return RedirectToAction(IndexActionName, HomeControllerName);
+                    return RedirectToAction(nameof(RegisterConfirmation));
                 }
 
-                foreach (var error in result.Errors)
+                foreach (var error in registerResult.RegistrationErrors)
                 {
-                    ModelState.AddModelError(error.Code, error.Description);
+                    ModelState.AddModelError(string.Empty, error);
                 }
             }
 
-            return View();
+
+            await FillViewBagWithExternalLoginsAsync();
+
+            return View(userModel);
         }
 
         [HttpGet]
@@ -85,16 +70,9 @@ namespace Northwind.Web.Controllers
                 return RedirectToAction(IndexActionName, HomeControllerName);
             }
 
-            var user = await _userManager.FindByIdAsync(userId);
-            if (user == null)
-            {
-                return RedirectToAction(IndexActionName, HomeControllerName);
-            }
+            var confirmed = await _accountsService.ConfirmEmailAsync(userId, code);
 
-            code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code));
-            var result = await _userManager.ConfirmEmailAsync(user, code);
-
-            return View(new ConfirmEmailModel { IsConfirmed = result.Succeeded });
+            return View(new ConfirmEmailModel { IsConfirmed = confirmed });
         }
 
         [HttpGet]
@@ -108,6 +86,8 @@ namespace Northwind.Web.Controllers
         {
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
 
+            await FillViewBagWithExternalLoginsAsync();
+
             return View();
         }
 
@@ -116,7 +96,7 @@ namespace Northwind.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await _signInManager.PasswordSignInAsync(userModel.Email, userModel.Password, userModel.RememberMe, lockoutOnFailure: true);
+                var result = await _accountsService.LoginAsync(_mapper.Map<User>(userModel), lockout: true);
                 if (result.Succeeded)
                 {
                     return RedirectToAction(IndexActionName, HomeControllerName);
@@ -131,6 +111,54 @@ namespace Northwind.Web.Controllers
             }
 
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult ExternalLogin(string provider, string returnUrl = null)
+        {
+            var redirectUrl = Url.Action(nameof(ExternalLoginCallback), AccountControllerName, values: new { returnUrl });
+            var properties = _accountsService.GetAuthenticationProperties(provider, redirectUrl);
+
+            return new ChallengeResult(provider, properties);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ExternalLoginCallback(string remoteError = null)
+        {
+            if (remoteError != null)
+            {
+                ModelState.AddModelError(string.Empty, $"Error from external provider: {remoteError}");
+                await FillViewBagWithExternalLoginsAsync();
+
+                return View(nameof(Login));
+            }
+
+            ExternalLoginResult externalLoginResult = null;
+            try
+            {
+                externalLoginResult = await _accountsService.ExternalLoginAsync();
+                if (externalLoginResult.SignInSucceeded || externalLoginResult.CreateUserSucceeded)
+                {
+                    return RedirectToAction(IndexActionName, HomeControllerName);
+                }
+
+                if (externalLoginResult.IsLockedOut)
+                {
+                    return RedirectToAction(nameof(Lockout));
+                }
+            }
+            catch (ArgumentException e)
+            {
+                ModelState.AddModelError(string.Empty, e.Message);
+            }
+
+            await FillViewBagWithExternalLoginsAsync();
+            foreach (var error in externalLoginResult.CreateUserErrors)
+            {
+                ModelState.AddModelError(string.Empty, error);
+            }
+
+            return View(nameof(Login));
         }
 
         [HttpGet]
@@ -148,7 +176,7 @@ namespace Northwind.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Logout(string returnUrl)
         {
-            await _signInManager.SignOutAsync();
+            await _accountsService.LogoutAsync();
 
             return LocalRedirect(returnUrl);
         }
@@ -164,19 +192,18 @@ namespace Northwind.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await _userManager.FindByEmailAsync(email);
-                if (user == null || !await _userManager.IsEmailConfirmedAsync(user))
+                try
                 {
-                    ModelState.AddModelError(email, EmailNotExist);
+                    var callbackUrl = Url.Action(nameof(ResetPassword), AccountControllerName, null, Request.Scheme);
+
+                    await _accountsService.SendResetEmailAsync(email, callbackUrl);
+
+                    return RedirectToAction(nameof(ForgotPasswordConfirmation));
                 }
-
-                var code = await _userManager.GeneratePasswordResetTokenAsync(user);
-                code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                var callbackUrl = Url.Action(nameof(ResetPassword), AccountControllerName, new { code }, Request.Scheme);
-
-                await _emailService.SendAsync(email, EmailsContent.ResetPasswordSubject, string.Format(EmailsContent.ResetPasswordMessage, HtmlEncoder.Default.Encode(callbackUrl)));
-
-                return RedirectToAction(nameof(ForgotPasswordConfirmation));
+                catch (ArgumentException e)
+                {
+                    ModelState.AddModelError(string.Empty, e.Message);
+                }
             }
 
             return RedirectToAction(IndexActionName, HomeControllerName);
@@ -199,29 +226,35 @@ namespace Northwind.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> ResetPassword(ResetPasswordModel resetPasswordModel)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                return View();
-            }
+                try
+                {
+                    var result = await _accountsService.ResetPasswordAsync(_mapper.Map<User>(resetPasswordModel));
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction(IndexActionName, HomeControllerName);
+                    }
 
-            var user = await _userManager.FindByEmailAsync(resetPasswordModel.Email);
-            if (user == null)
-            {
-                ModelState.AddModelError(resetPasswordModel.Email, EmailNotExist);
-            }
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(error.Code, error.Description);
+                    }
 
-            var result = await _userManager.ResetPasswordAsync(user, Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(resetPasswordModel.Code)), resetPasswordModel.Password);
-            if (result.Succeeded)
-            {
-                return RedirectToAction(IndexActionName, HomeControllerName);
-            }
-
-            foreach (var error in result.Errors)
-            {
-                ModelState.AddModelError(error.Code, error.Description);
+                    return RedirectToAction(nameof(ForgotPasswordConfirmation));
+                }
+                catch (ArgumentException e)
+                {
+                    ModelState.AddModelError(string.Empty, e.Message);
+                }
             }
 
             return View();
+        }
+
+        private async Task FillViewBagWithExternalLoginsAsync()
+        {
+            ViewBag.ExternalLogins = (await _accountsService.GetExternalLoginsAsync()).ToList();
         }
     }
 }

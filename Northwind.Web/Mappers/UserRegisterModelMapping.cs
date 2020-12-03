@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Identity;
+using Northwind.Core.Domain;
 using Northwind.Web.Models;
 
 namespace Northwind.Web.Mappers
@@ -13,7 +13,7 @@ namespace Northwind.Web.Mappers
 
         private static IProfileExpression FromUserRegisterModel(this IProfileExpression configuration)
         {
-            configuration.CreateMap<UserRegisterModel, IdentityUser>()
+            configuration.CreateMap<UserRegisterModel, User>()
                 .ForMember(dest => dest.UserName, opt => opt.MapFrom(source => source.Email));
 
             return configuration;

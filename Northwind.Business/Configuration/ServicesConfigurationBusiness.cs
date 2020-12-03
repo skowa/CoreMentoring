@@ -39,6 +39,7 @@ namespace Northwind.Business.Configuration
             services.AddScoped<IImagesService, BmpImagesService>();
 
             services.AddScoped<IEmailService, EmailService>();
+            services.AddScoped<IAccountsService, AccountsService>();
 
             return services;
         }

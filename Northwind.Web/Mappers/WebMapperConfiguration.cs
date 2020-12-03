@@ -10,7 +10,9 @@ namespace Northwind.Web.Mappers
         {
             configuration
                 .ApplyCoreWebMapperConfiguration()
-                .ApplyUserRegisterModelMapping();
+                .ApplyUserRegisterModelMapping()
+                .ApplyUserLoginModelMapping()
+                .ApplyResetPasswordModelMapping();
 
             return configuration;
         }

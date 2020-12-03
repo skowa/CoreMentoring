@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -6,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Identity.Web;
 using Northwind.Core.Caching.Configuration;
 using Northwind.Core.Caching.Options;
 using Northwind.Core.Constants;
@@ -22,6 +22,10 @@ namespace Northwind.Web
     public class Startup
     {
         private const string ErrorEndpoint = "/home/error";
+        private const string GitHubProvider = "GitHub";
+        private const string GitHubClientId = "ClientId";
+        private const string GitHubClientSecret = "ClientSecret";
+        private const string UserEmailScope = "user:email";
 
         public Startup(IConfiguration configuration)
         {
@@ -49,6 +53,18 @@ namespace Northwind.Web
                 options.Password.RequireNonAlphanumeric = false;
                 options.User.RequireUniqueEmail = true;
             });
+
+            services.AddAuthentication()
+                // AzureAd sign in is not working as expected for some reason,
+                // so I've added GitHub to show that the login functionality itself with external provider is working correctly.
+                // ClientSecret is stored in user secrets.
+                .AddGitHub(GitHubProvider, options =>
+                {
+                    options.ClientId = Configuration[$"{ConfigurationProperties.GitHubSection}:{GitHubClientId}"];
+                    options.ClientSecret = Configuration[$"{ConfigurationProperties.GitHubSection}:{GitHubClientSecret}"];
+                    options.Scope.Add(UserEmailScope);
+                })
+                .AddMicrosoftIdentityWebApp(Configuration);
 
             services.AddControllersWithViews(options =>
             {

@@ -56,7 +56,6 @@ namespace Northwind.Web.Controllers
                 }
             }
 
-
             await FillViewBagWithExternalLoginsAsync();
 
             return View(userModel);

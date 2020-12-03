@@ -252,6 +252,12 @@ namespace Northwind.Web.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
+
         private async Task FillViewBagWithExternalLoginsAsync()
         {
             ViewBag.ExternalLogins = (await _accountsService.GetExternalLoginsAsync()).ToList();

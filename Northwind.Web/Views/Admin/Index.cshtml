@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Northwind.Web.Models.UserModel>
+
+@{
+    ViewData["Title"] = "Users Page";
+}
+
+<vc:breadcrumbs />
+
+<div class="container">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserName)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(_ => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(_ => item.UserName)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -8,6 +8,8 @@ namespace Northwind.Business.Interfaces.Services
 {
     public interface IAccountsService
     {
+        IEnumerable<User> GetUsers();
+
         Task<RegisterUserResult> RegisterUserAsync(User user, string callbackUrl);
 
         Task<bool> ConfirmEmailAsync(string userId, string code);

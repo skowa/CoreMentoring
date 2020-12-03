@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -22,6 +23,7 @@ namespace Northwind.Web
     public class Startup
     {
         private const string ErrorEndpoint = "/home/error";
+        private const string AccessDeniedEndpoint = "/Account/AccessDenied";
         private const string GitHubProvider = "GitHub";
         private const string GitHubClientId = "ClientId";
         private const string GitHubClientSecret = "ClientSecret";
@@ -46,12 +48,19 @@ namespace Northwind.Web
             services.AddWebServices();
             services.AddCachingServices();
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<UserStoreContext>();
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<UserStoreContext>();
 
             services.Configure<IdentityOptions>(options =>
             {
                 options.Password.RequireNonAlphanumeric = false;
                 options.User.RequireUniqueEmail = true;
+            });
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.AccessDeniedPath = AccessDeniedEndpoint;
             });
 
             services.AddAuthentication()
@@ -72,7 +81,7 @@ namespace Northwind.Web
             });
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger logger)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider, ILogger logger)
         {
             logger.Information(LogMessages.ApplicationStartedFrom, env.ContentRootPath);
             logger.Information(LogMessages.ConfigurationLoaded, Configuration.AsEnumerable());
@@ -91,6 +100,7 @@ namespace Northwind.Web
             app.UseRouting();
 
             app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseMiddleware<ImageCachingMiddleware>();
 
@@ -105,6 +115,11 @@ namespace Northwind.Web
                     pattern: string.Format(Routes.ImagesRoute, "{id}"),
                     defaults: new { controller = "Categories", action = "Image" });
             });
+
+            if (env.IsDevelopment())
+            {
+                UserStoreConfiguration.SeedDataAsync(serviceProvider).GetAwaiter().GetResult();
+            }
         }
     }
 }

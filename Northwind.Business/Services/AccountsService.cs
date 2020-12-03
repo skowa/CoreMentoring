@@ -6,6 +6,7 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.WebUtilities;
@@ -35,6 +36,11 @@ namespace Northwind.Business.Services
             _signInManager = signInManager;
             _emailService = emailService;
             _mapper = mapper;
+        }
+
+        public IEnumerable<User> GetUsers()
+        {
+            return _userManager.Users.ProjectTo<User>(_mapper.ConfigurationProvider).ToList();
         }
 
         public async Task<RegisterUserResult> RegisterUserAsync(User user, string callbackUrl)

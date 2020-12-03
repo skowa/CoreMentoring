@@ -9,12 +9,20 @@ namespace Northwind.Business.Mappers
         internal static IProfileExpression ApplyUserMapping(this IProfileExpression configuration)
         {
             return configuration
-                .FromUser();
+                .FromUser()
+                .ToUser();
         }
 
         private static IProfileExpression FromUser(this IProfileExpression configuration)
         {
             configuration.CreateMap<User, IdentityUser>();
+
+            return configuration;
+        }
+
+        private static IProfileExpression ToUser(this IProfileExpression configuration)
+        {
+            configuration.CreateMap<IdentityUser, User>();
 
             return configuration;
         }

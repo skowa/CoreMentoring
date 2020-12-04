@@ -9,5 +9,6 @@
         public const string LoggingSection = "Logging";
         public const string SmtpSettingsSection = "SmtpSettings";
         public const string GitHubSection = "GitHub";
+        public const string AzureAdSection = "AzureAd";
     }
 }

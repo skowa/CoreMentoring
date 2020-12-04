@@ -1,12 +1,12 @@
 using System;
 using System.Linq;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Identity.Web;
 using Northwind.Core.Caching.Configuration;
 using Northwind.Core.Caching.Options;
 using Northwind.Core.Constants;
@@ -64,16 +64,16 @@ namespace Northwind.Web
             });
 
             services.AddAuthentication()
-                // AzureAd sign in is not working as expected for some reason,
-                // so I've added GitHub to show that the login functionality itself with external provider is working correctly.
-                // ClientSecret is stored in user secrets.
                 .AddGitHub(GitHubProvider, options =>
                 {
                     options.ClientId = Configuration[$"{ConfigurationProperties.GitHubSection}:{GitHubClientId}"];
                     options.ClientSecret = Configuration[$"{ConfigurationProperties.GitHubSection}:{GitHubClientSecret}"];
                     options.Scope.Add(UserEmailScope);
                 })
-                .AddMicrosoftIdentityWebApp(Configuration);
+                // Our scenario doesn't work with the new library that was referenced in module.
+                // There is a bug, that is opened in guthub https://github.com/AzureAD/microsoft-identity-web/issues/133#issuecomment-737204100
+                // So, the old library is needed to be used.
+                .AddAzureAD(options => Configuration.Bind(ConfigurationProperties.AzureAdSection, options));
 
             services.AddControllersWithViews(options =>
             {

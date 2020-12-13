@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Northwind.Business.Interfaces.Providers;
 using Northwind.Business.Interfaces.Services;
@@ -17,6 +18,7 @@ namespace Northwind.Business.Configuration
             return services
                 .AddProviders()
                 .AddServices()
+                .AddDbContext()
                 .AddUnitOfWork();
         }
 
@@ -36,6 +38,9 @@ namespace Northwind.Business.Configuration
             services.AddScoped<ISuppliersService, SuppliersService>();
             services.AddScoped<IImagesService, BmpImagesService>();
 
+            services.AddScoped<IEmailService, EmailService>();
+            services.AddScoped<IAccountsService, AccountsService>();
+
             return services;
         }
 
@@ -44,6 +49,13 @@ namespace Northwind.Business.Configuration
             services.AddSingleton<IUnitOfWorkFactory<IUnitOfWork>>(p => new UnitOfWorkFactory(p.GetService<IOptions<ConnectionStringStore>>().Value.NorthwindDb));
 
             services.AddScoped<IUnitOfWork>(p => p.GetService<IUnitOfWorkFactory<IUnitOfWork>>().Create());
+
+            return services;
+        }
+
+        private static IServiceCollection AddDbContext(this IServiceCollection services)
+        {
+            services.AddDbContext<UserStoreContext>((provider, options) => options.UseSqlServer(provider.GetService<IOptions<ConnectionStringStore>>().Value.UserStoreDb));
 
             return services;
         }

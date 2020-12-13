@@ -10,7 +10,8 @@ namespace Northwind.Business.Mappers
             configuration
                 .ApplyCategoryMapping()
                 .ApplySupplierMapping()
-                .ApplyProductMapping();
+                .ApplyProductMapping()
+                .ApplyUserMapping();
 
             return configuration;
         }

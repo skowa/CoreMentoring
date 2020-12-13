@@ -1,0 +1,20 @@
+﻿@model Northwind.Web.Models.ConfirmEmailModel
+@{
+    ViewData["Title"] = "Register confirmation";
+}
+
+<div class="container">
+    <h1>@ViewData["Title"]</h1>
+    @if (Model.IsConfirmed)
+    {
+        <p>
+            Thank you for confirming your email.
+        </p>
+    }
+    else
+    {
+        <p>
+            Error confirming your email.
+        </p>
+    }
+</div>

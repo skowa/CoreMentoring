@@ -1,0 +1,12 @@
+﻿@using Northwind.Core.Constants
+
+<ul class="navbar-nav">
+    @if (User.IsInRole(UserRoles.Admin))
+    {
+        <li class="nav-item">
+            <form class="form-inline" asp-controller="Admin" asp-action="Index">
+                <button type="submit" class="nav-link btn btn-link">Users</button>
+            </form>
+        </li>
+    }
+</ul>

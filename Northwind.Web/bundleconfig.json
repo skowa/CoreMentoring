@@ -1,0 +1,23 @@
+﻿[
+  {
+    "outputFileName": "wwwroot/css/site.min.css",
+    "inputFiles": [
+      "wwwroot/css/site.css"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/lib/jquery-validation/jquery-validation-bundle.min.js",
+    "inputFiles": [
+      "wwwroot/lib/jquery-validate/jquery-validate.min.js",
+      "wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+  }
+]
